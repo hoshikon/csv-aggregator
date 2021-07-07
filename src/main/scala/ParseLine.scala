@@ -22,7 +22,7 @@ object ValidMonzoLine {
   private val TimeRegex = "([0-9]{2}):([0-9]{2}):([0-9]{2})".r
 
   def unapply(line: String): Option[MonzoStatementRow] = {
-    line.split(" *, *").toList match {
+    line.replaceAll("\"(.*)\"", "").split(" *, *").toList match {
       case _ :: DateRegex(dayStr, monthStr, yearStr) :: TimeRegex(hourStr, minuteStr, secondStr) :: transactionType :: _ :: _ :: _ :: amountStr :: _ =>
         for {
           year <- yearStr.toIntOption
