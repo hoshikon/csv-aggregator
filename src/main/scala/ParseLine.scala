@@ -8,7 +8,7 @@ import scala.util.Try
 
 trait ParseLine[T]  extends (String => IO[Option[T]])
 
-class ParseMonzoStatement(logger: String => IO[Unit]) extends ParseLine[MonzoStatementRow] {
+class ParseMonzoStatementLine(logger: String => IO[Unit]) extends ParseLine[MonzoStatementRow] {
   override def apply(line: String): IO[Option[MonzoStatementRow]] = {
     line match {
       case ValidMonzoLine(monzoStatementRow) => IO.pure(Some(monzoStatementRow))
